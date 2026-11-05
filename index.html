@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef3f2">
+  <title>weatherly — a clearer kind of forecast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Weatherly home">
+      <span class="brand-mark">☼</span><span>weatherly<span class="brand-dot">.</span></span>
+    </a>
+    <div class="top-note"><span class="live-dot"></span> WEATHER, WITHOUT THE NOISE</div>
+    <button id="unit-toggle" class="unit-toggle" aria-label="Switch temperature units">°C <span>/</span> °F</button>
+  </header>
+
+  <main class="layout">
+    <section class="main-column">
+      <section class="intro">
+        <div class="eyebrow">A LITTLE LOOK OUTSIDE</div>
+        <h1>A clearer kind<br>of <em>forecast.</em></h1>
+        <p>Know the feel of the day before you step into it.</p>
+      </section>
+
+      <form class="search" id="search-form">
+        <span class="search-icon">⌕</span>
+        <label class="sr-only" for="city-input">Search for a city</label>
+        <input id="city-input" type="search" placeholder="Search a city or place..." autocomplete="off">
+        <button type="submit">Find weather <span>→</span></button>
+      </form>
+      <div id="search-results" class="search-results hidden"></div>
+      <div id="status" class="status hidden" role="status" aria-live="polite"></div>
+
+      <section class="current-card" id="current-card" aria-live="polite">
+        <div class="current-top">
+          <div>
+            <div class="eyebrow">RIGHT NOW</div>
+            <h2 id="place-name">Bengaluru, India</h2>
+            <p id="current-date">Checking local conditions…</p>
+          </div>
+          <button id="refresh-button" class="icon-button" aria-label="Refresh weather" title="Refresh">↻</button>
+        </div>
+        <div class="current-main">
+          <div class="weather-symbol" id="current-symbol" aria-hidden="true">☀</div>
+          <div class="temperature" id="current-temp">--°</div>
+          <div class="current-summary"><strong id="current-condition">Loading forecast</strong><span id="feels-like">Feels like --°</span></div>
+        </div>
+        <div class="current-bottom">
+          <span id="high-low">H: --° &nbsp; L: --°</span>
+          <span id="current-description">A moment, while we look outside.</span>
+        </div>
+      </section>
+
+      <section class="forecast-section">
+        <div class="section-heading">
+          <div><div class="eyebrow">THE NEXT FEW HOURS</div><h2>Hour by <em>hour.</em></h2></div>
+          <span class="section-aside">Local time</span>
+        </div>
+        <div class="hourly-list" id="hourly-list"></div>
+      </section>
+
+      <section class="forecast-section">
+        <div class="section-heading">
+          <div><div class="eyebrow">AHEAD OF THE WEEK</div><h2>Seven days, <em>roughly.</em></h2></div>
+          <span class="section-aside">Daily outlook</span>
+        </div>
+        <div class="weekly-list" id="weekly-list"></div>
+      </section>
+    </section>
+
+    <aside class="side-column">
+      <div class="side-title"><div class="eyebrow">THE DETAILS</div><span>✳</span></div>
+      <p class="side-subtitle">Small things that make<br>the day feel different.</p>
+
+      <div class="detail-card">
+        <div class="detail-icon humidity-icon">◌</div>
+        <div class="detail-label">HUMIDITY</div>
+        <strong id="humidity">--%</strong>
+        <small id="humidity-note">Loading</small>
+      </div>
+      <div class="detail-card">
+        <div class="detail-icon wind-icon">≋</div>
+        <div class="detail-label">WIND</div>
+        <strong id="wind">-- <small>km/h</small></strong>
+        <small id="wind-note">Loading</small>
+      </div>
+      <div class="detail-card">
+        <div class="detail-icon uv-icon">☼</div>
+        <div class="detail-label">UV INDEX</div>
+        <strong id="uv">--</strong>
+        <small id="uv-note">Loading</small>
+        <div class="uv-meter"><span id="uv-meter-fill"></span></div>
+      </div>
+      <div class="detail-card sun-card">
+        <div class="sun-times">
+          <div><div class="detail-label">SUNRISE</div><strong id="sunrise">--:--</strong></div>
+          <div class="sun-arc">◠<span>☼</span></div>
+          <div class="sunset"><div class="detail-label">SUNSET</div><strong id="sunset">--:--</strong></div>
+        </div>
+        <div class="sun-line"><span></span></div>
+        <small id="daylight">Today’s daylight</small>
+      </div>
+
+      <section class="saved-section">
+        <div class="eyebrow">YOUR PLACES</div>
+        <div id="saved-places" class="saved-places"></div>
+        <form id="save-place-form" class="save-place-form">
+          <label class="sr-only" for="save-place-input">Add a saved city</label>
+          <input id="save-place-input" placeholder="Add a place..." maxlength="60">
+          <button aria-label="Add saved city" type="submit">＋</button>
+        </form>
+      </section>
+
+      <div class="source-note">Forecast by Open-Meteo<br>Refreshes when you ask.</div>
+    </aside>
+  </main>
+
+  <footer class="footer"><span>weatherly<span class="brand-dot">.</span></span><span>Look up. Step out.</span><span id="updated-at">Forecast data may vary.</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
